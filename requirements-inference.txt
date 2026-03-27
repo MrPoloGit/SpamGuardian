@@ -1,0 +1,9 @@
+# Lean inference-only dependencies for Docker (CPU build).
+# For GPU support, replace the torch line with the appropriate +cuXXX wheel
+# and use the nvidia/cuda base image in the Dockerfile.
+--extra-index-url https://download.pytorch.org/whl/cpu
+torch
+transformers==4.53.0
+Flask==3.1.1
+flask-cors==6.0.1
+gunicorn==23.0.0

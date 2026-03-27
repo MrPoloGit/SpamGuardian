@@ -1,0 +1,20 @@
+services:
+  spamguardian:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount the trained model weights (read-only). Train locally first with:
+      #   python train_model.py
+      # then bring the service up.
+      - ./model:/app/model:ro
+    environment:
+      MODEL_PATH: /app/model
+      PORT: "8000"
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+    restart: unless-stopped
